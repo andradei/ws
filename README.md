@@ -52,3 +52,8 @@ ws [command | workspace name] [workspace name]
 - Can't override existing workspaces (`-force` option will be added later to change this on demand)
 - Multiple workspaces can have the same path (aliasing)
 - TODO: Workspace named _default_ can be accessed without parameters, just run `ws`
+
+## Implementation Details
+
+- `fmt.Print` is used when the output of `ws` is a directory path. Example: when running `ws my-workspace`
+- `printMsg` is used when the output is an error or some information. Example: when running `ws -list`

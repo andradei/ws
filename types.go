@@ -121,4 +121,11 @@ func (md *metadata) delete(name string) error {
 }
 
 // TODO
-func (md *metadata) list() (string, error) { panic("unimplemented") }
+func (md *metadata) list() (string, error) {
+	var result string
+	for _, ws := range md.workspaces {
+		result += ws.Name
+	}
+
+	return result, nil
+}

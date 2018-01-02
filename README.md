@@ -1,6 +1,9 @@
 # ws
 
-CLI workspace manager. Accessible via the `ws` binary
+Unix CLI workspace manager. Accessible via the `ws` binary
+
+_Windows isn't supported mainly because I don't use _Command Prompt_, _PowerShell_, etc., PRs for
+that are welcome._
 
 This tool outputs the path of a given workspace so your shell can use to change directories. This is
 necessary because processes change working directory only in the context in which they run, the

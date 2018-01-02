@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
+
+	color "github.com/fatih/color-1.5.0"
 )
 
 type workspace struct {
@@ -120,12 +123,20 @@ func (md *metadata) delete(name string) error {
 	return nil
 }
 
-// TODO
+// Create a list of workspaces stored in the metadata file.
+// TODO: Use colors
 func (md *metadata) list() (string, error) {
-	var result string
+	var result bytes.Buffer
+	yellow := color.New(color.FgYellow).SprintfFunc()
+	green := color.New(color.FgGreen).SprintfFunc()
+
 	for _, ws := range md.workspaces {
-		result += ws.Name
+		// TODO: Use colors
+		_, err := result.WriteString(fmt.Sprintf("%s\t\t%s\n", green(ws.Name), yellow(ws.Path)))
+		if err != nil {
+			return "", fmt.Errorf("unable to write list: %v", err)
+		}
 	}
 
-	return result, nil
+	return result.String(), nil
 }

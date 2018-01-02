@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -11,12 +12,13 @@ func printMsg(msg interface{}) {
 	var err error
 	switch m := msg.(type) {
 	case string:
-		_, err = os.Stderr.WriteString(m + "\n")
+		// _, err = os.Stderr.WriteString(m + "\n")
+		_, err = fmt.Fprintf(os.Stdout, "info:\n%v\n", m)
 		if err != nil {
 			panic("could not print error message to stderr")
 		}
 	case error:
-		_, err = os.Stderr.WriteString(m.Error() + "\n")
+		_, err = fmt.Fprintf(os.Stdout, "error:\n%v", m.Error())
 		if err != nil {
 			panic("could not print error message to stderr")
 		}

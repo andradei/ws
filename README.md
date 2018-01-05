@@ -11,21 +11,7 @@ directory changes back to what it was before the program ran when it exits.
 
 ## Installation
 
-1. Run on your terminal `go get github.com/andradei/ws` (Homebrew formula will be available later)
-1. Integrate `ws` in your shell with the following function on your `.bashrc` file or equivalent:
-    ```bash
-    # A function with the same name as the program.
-    function ws {
-        # Replace the value below by the path to the ws binary on your machine.
-        local path=$GOPATH/bin/ws
-        # Call ws and pass to it all the arguments given to this function by using $@.
-        if dir=$($path $@); then
-            # If successful, ws will output the directory of a workspace. So cd into that.
-            cd "$dir"
-        fi
-    }
-    ```
-1. Reload your shell (easiest way is restarting your terminal) `source ~/.bashrc` (or equivalent to your shell configuration file).
+Run on your terminal `go get github.com/andradei/ws`
 
 ## Commands
 
@@ -40,6 +26,13 @@ ws [command | workspace name] [workspace name]
 -delete | -d <name>    Delete an existing workspace with name
 -help | -h             Display this help message
 -list | -l             List existing workspaces
+```
+
+When using `ws [workspace name]`, `ws` will output the directory of for the given workspace name.
+So you can do the following:
+
+```
+cd $(ws myworkspace)
 ```
 
 ## Examples

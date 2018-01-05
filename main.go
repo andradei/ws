@@ -10,7 +10,7 @@ import (
 func main() {
 	md, err := getMetadata()
 	if err != nil {
-		printMsg(err)
+		printErr(err)
 		os.Exit(1)
 	}
 	// Check the quantity of arguments are the allowed quantity.
@@ -28,16 +28,16 @@ func main() {
 		case "-list", "-ls", "-l":
 			ls, err := md.list()
 			if err != nil {
-				printMsg(fmt.Errorf("list: %v", err))
+				printErr(fmt.Errorf("list: %v", err))
 			}
-			printMsg(ls)
+			printErr(ls)
 		default:
 			ws := os.Args[1]
 			if strings.HasPrefix(ws, "-") {
-				printMsg(fmt.Errorf("command %s not found", ws))
+				printErr(fmt.Errorf("command %s not found", ws))
 			} else {
 				if i, err := md.getWorkspace(ws); err != nil {
-					printMsg(err)
+					printErr(err)
 				} else {
 					// The successful return value of this program is the workspace's path.
 					fmt.Print(md.workspaces[i].Path)
@@ -53,17 +53,17 @@ func main() {
 			// Get current working directory
 			pwd, err := os.Getwd()
 			if err != nil {
-				printMsg(fmt.Errorf("unable to retrieve working directory: %v", err))
+				printErr(fmt.Errorf("unable to retrieve working directory: %v", err))
 			}
 			if err := md.insert(ws, pwd); err != nil {
-				printMsg(err)
+				printErr(err)
 			}
 		case "-delete", "-d":
 			if err := md.delete(ws); err != nil {
-				printMsg(err)
+				printErr(err)
 			}
 		default:
-			printMsg(errors.New("please provide a valid command (See -help or -h)"))
+			printErr(errors.New("please provide a valid command (See -help or -h)"))
 		}
 	}
 }

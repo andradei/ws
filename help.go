@@ -8,7 +8,7 @@ import (
 // Print a message to stderr. msg can be of type:
 // - string
 // - error
-func printMsg(msg interface{}) {
+func printErr(msg interface{}) {
 	var err error
 	switch m := msg.(type) {
 	case string:

@@ -124,14 +124,12 @@ func (md *metadata) delete(name string) error {
 }
 
 // Create a list of workspaces stored in the metadata file.
-// TODO: Use colors
 func (md *metadata) list() (string, error) {
 	var result bytes.Buffer
 	yellow := color.New(color.FgYellow).SprintfFunc()
 	green := color.New(color.FgGreen).SprintfFunc()
 
 	for _, ws := range md.workspaces {
-		// TODO: Use colors
 		_, err := result.WriteString(fmt.Sprintf("%s\t\t%s\n", green(ws.Name), yellow(ws.Path)))
 		if err != nil {
 			return "", fmt.Errorf("unable to write list: %v", err)

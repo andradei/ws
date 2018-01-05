@@ -1,55 +1,52 @@
 # ws
 
-Unix CLI workspace manager. Accessible via the `ws` binary
+Unix CLI directory alias manager. Accessible via the `ws` binary
 
 _Windows isn't supported mainly because I don't use _Command Prompt_, _PowerShell_, etc., PRs for
 that are welcome._
 
-This tool outputs the path of a given workspace so your shell can use to change directories. This is
-necessary because processes change working directory only in the context in which they run, the
-directory changes back to what it was before the program ran when it exits.
+In `ws` directories are called workspaces.
 
 ## Installation
 
-Run on your terminal `go get github.com/andradei/ws`
+Run on your terminal `go get github.com/andradei/ws`. Or download a version from the Releases page.
 
 ## Commands
-
-TODO: Create output of `ws -help` and add it below
 
 TODO: Create a gif with usage examples
 
 ```bash
-ws [command | workspace name] [workspace name]
+$ ws -help
 
--insert | -i <name>    Create a workspace with name
--delete | -d <name>    Delete an existing workspace with name
--help | -h             Display this help message
--list | -l             List existing workspaces
+ws - Directory alias manager
+
+Usage: ws <command [workspace name]> | <workspace name>
+
+   -create | -c <workspace name>
+       Create a workspace with given name
+
+   -delete | -d <workspace name>
+       Delete an existing workspace by name
+
+   -help | -h
+       Display this help message
+
+   -list | -l
+       List existing workspaces
+
 ```
 
-When using `ws [workspace name]`, `ws` will output the directory of for the given workspace name.
+When using the `ws <workspace name>` form, `ws` will output the directory of for the given workspace name.
 So you can do the following:
 
 ```
-cd $(ws myworkspace)
+cd $(ws my_workspace)
 ```
 
 ## Examples
 
-- Create workspace: `ws -insert project1`
+- Create workspace: `ws -create project1`
 
-- Go to workspace: `ws project1`
+- Go to workspace: `cd $(ws project1)`
 
 - Delete workspace: `ws -delete project1`
-
-## Behavior
-
-- Can't override existing workspaces (`-force` option will be added later to change this on demand)
-- Multiple workspaces can have the same path (aliasing)
-- TODO: Workspace named _default_ can be accessed without parameters, just run `ws`
-
-## Implementation Details
-
-- `fmt.Print` is used when the output of `ws` is a directory path. Example: when running `ws my-workspace`
-- `printMsg` is used when the output is an error or some information. Example: when running `ws -list`

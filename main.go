@@ -25,12 +25,12 @@ func main() {
 		switch os.Args[1] {
 		case "-help", "-h":
 			help()
-		case "-list", "-ls", "-l":
+		case "-list", "-l":
 			ls, err := md.list()
 			if err != nil {
 				printErr(fmt.Errorf("list: %v", err))
 			}
-			printErr(ls)
+			fmt.Println(ls)
 		default:
 			ws := os.Args[1]
 			if strings.HasPrefix(ws, "-") {
@@ -49,7 +49,7 @@ func main() {
 		ws := os.Args[2]
 
 		switch cmd {
-		case "-insert", "-i":
+		case "-create", "-c":
 			// Get current working directory
 			pwd, err := os.Getwd()
 			if err != nil {

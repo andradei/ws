@@ -7,12 +7,13 @@ import (
 	color "github.com/fatih/color-1.5.0"
 )
 
-// Print an error to stderr. May panic.
+// Print an error to stderr and exits the program. May panic.
 func printErr(msg error) {
 	_, err := fmt.Fprint(os.Stderr, color.RedString("ws: %v\n", msg))
 	if err != nil {
 		panic("could not print error message to stderr")
 	}
+	os.Exit(1)
 }
 
 // Display tool usage information.

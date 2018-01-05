@@ -16,9 +16,8 @@ func main() {
 	// Check the quantity of arguments are the allowed quantity.
 	l := len(os.Args)
 	switch l {
-	// Show help if no command is given
 	case 1:
-		// TODO: Got to a default (or the last) workspace?
+		// Show help if no command is given
 		help()
 	case 2:
 		// The argument is either a known command or a workspace name.
@@ -34,6 +33,12 @@ func main() {
 		default:
 			ws := os.Args[1]
 			if strings.HasPrefix(ws, "-") {
+				cmds := []string{"-delete", "-d", "-create", "-c"}
+				for _, cmd := range cmds {
+					if ws == cmd {
+						printErr(fmt.Errorf("command %s requires an aditional argument, see -help", cmd))
+					}
+				}
 				printErr(fmt.Errorf("command %s not found", ws))
 			} else {
 				if i, err := md.getWorkspace(ws); err != nil {

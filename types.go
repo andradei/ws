@@ -26,16 +26,22 @@ type metadata struct {
 // Create the metadata file if it didn't exist previously. This function may not write to the
 // metadata file.
 func getMetadata() (*metadata, error) {
+	var dir string
 	var path string
 	homeDir := os.Getenv("HOME")
 	if homeDir == "" {
 		return nil, errors.New("please set the HOME environment variable")
 	}
-	path = homeDir + "/.ws"
+	dir = homeDir + "/.config/ws"
+	path = dir + "/ws.json"
 
 	md, err := os.Open(path)
 	if err != nil {
 		if os.IsNotExist(err) {
+			err := os.MkdirAll(dir, 0755)
+			if err != nil {
+				return nil, fmt.Errorf("unable to create metadata config directory")
+			}
 			// metadata will have an empty workspaces instance since no metadata file exists yet.
 			return &metadata{make([]workspace, 0, 1), path}, nil
 		}

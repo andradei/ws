@@ -49,7 +49,7 @@ func main() {
 					printErr(err)
 				} else {
 					// The successful return value of this program is the workspace's path.
-					fmt.Print(md.workspaces[i].Path)
+					fmt.Println(md.workspaces[i].Path)
 				}
 			}
 		}

@@ -7,13 +7,13 @@ that are welcome._
 
 In `ws` directories are called workspaces.
 
+![ws gif usage showcase](ws.gif)
+
 ## Installation
 
 Run on your terminal `go get github.com/andradei/ws`. Or download a version from the Releases page.
 
 ## Commands
-
-TODO: Create a gif with usage examples
 
 ```bash
 $ ws -help

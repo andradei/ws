@@ -136,7 +136,7 @@ func (md *metadata) list() (string, error) {
 	green := color.New(color.FgGreen).SprintfFunc()
 
 	for _, ws := range md.workspaces {
-		_, err := result.WriteString(fmt.Sprintf("%s\t\t%s\n", green(ws.Name), yellow(ws.Path)))
+		_, err := result.WriteString(fmt.Sprintf("  %s\t\t%s\n", green(ws.Name), yellow(ws.Path)))
 		if err != nil {
 			return "", fmt.Errorf("unable to write list: %v", err)
 		}

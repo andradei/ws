@@ -22,7 +22,7 @@ ws - Directory alias manager
 
 Usage: ws <command [workspace name]> | <workspace name>
 
-   -create | -c <workspace name>
+  -create | -c <workspace name>
        Create a workspace with given name
 
    -delete | -d <workspace name>
@@ -33,6 +33,9 @@ Usage: ws <command [workspace name]> | <workspace name>
 
    -list | -l
        List existing workspaces
+
+   -version | -v
+       Display program version
 
 ```
 

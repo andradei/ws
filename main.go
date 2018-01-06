@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const version = "1.1"
+
 func main() {
 	md, err := getMetadata()
 	if err != nil {
@@ -29,7 +31,9 @@ func main() {
 			if err != nil {
 				printErr(fmt.Errorf("list: %v", err))
 			}
-			fmt.Println(ls)
+			fmt.Print(ls)
+		case "-version", "-v":
+			fmt.Printf("ws v%s\n", version)
 		default:
 			ws := os.Args[1]
 			if strings.HasPrefix(ws, "-") {
@@ -45,7 +49,7 @@ func main() {
 					printErr(err)
 				} else {
 					// The successful return value of this program is the workspace's path.
-					fmt.Print(md.workspaces[i].Path)
+					fmt.Println(md.workspaces[i].Path)
 				}
 			}
 		}

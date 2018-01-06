@@ -7,13 +7,13 @@ that are welcome._
 
 In `ws` directories are called workspaces.
 
+![ws gif usage showcase](ws.gif)
+
 ## Installation
 
 Run on your terminal `go get github.com/andradei/ws`. Or download a version from the Releases page.
 
 ## Commands
-
-TODO: Create a gif with usage examples
 
 ```bash
 $ ws -help
@@ -22,7 +22,7 @@ ws - Directory alias manager
 
 Usage: ws <command [workspace name]> | <workspace name>
 
-   -create | -c <workspace name>
+  -create | -c <workspace name>
        Create a workspace with given name
 
    -delete | -d <workspace name>
@@ -33,6 +33,9 @@ Usage: ws <command [workspace name]> | <workspace name>
 
    -list | -l
        List existing workspaces
+
+   -version | -v
+       Display program version
 
 ```
 

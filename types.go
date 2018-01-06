@@ -26,16 +26,22 @@ type metadata struct {
 // Create the metadata file if it didn't exist previously. This function may not write to the
 // metadata file.
 func getMetadata() (*metadata, error) {
+	var dir string
 	var path string
 	homeDir := os.Getenv("HOME")
 	if homeDir == "" {
 		return nil, errors.New("please set the HOME environment variable")
 	}
-	path = homeDir + "/.ws"
+	dir = homeDir + "/.config/ws"
+	path = dir + "/ws.json"
 
 	md, err := os.Open(path)
 	if err != nil {
 		if os.IsNotExist(err) {
+			err := os.MkdirAll(dir, 0755)
+			if err != nil {
+				return nil, fmt.Errorf("unable to create metadata config directory")
+			}
 			// metadata will have an empty workspaces instance since no metadata file exists yet.
 			return &metadata{make([]workspace, 0, 1), path}, nil
 		}
@@ -106,7 +112,7 @@ func (md *metadata) getWorkspace(name string) (int, error) {
 		}
 	}
 
-	return 0, errors.New("workspace doesn't exist")
+	return 0, fmt.Errorf("workspace %s doesn't exist", name)
 }
 
 func (md *metadata) delete(name string) error {
@@ -130,7 +136,7 @@ func (md *metadata) list() (string, error) {
 	green := color.New(color.FgGreen).SprintfFunc()
 
 	for _, ws := range md.workspaces {
-		_, err := result.WriteString(fmt.Sprintf("%s\t\t%s\n", green(ws.Name), yellow(ws.Path)))
+		_, err := result.WriteString(fmt.Sprintf("  %s\n    %s\n", green(ws.Name), yellow(ws.Path)))
 		if err != nil {
 			return "", fmt.Errorf("unable to write list: %v", err)
 		}

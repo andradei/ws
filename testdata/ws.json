@@ -1,0 +1,22 @@
+[
+  {
+    "name": "code",
+    "path": "/some/path/to/code"
+  },
+  {
+    "name": "exercises",
+    "path": "/some/path/to/exercises"
+  },
+  {
+    "name": "github",
+    "path": "/some/path/to/github"
+  },
+  {
+    "name": "gitlab",
+    "path": "/some/path/to/gitlab"
+  },
+  {
+    "name": "mysite",
+    "path": "/some/path/to/mysite"
+  }
+]

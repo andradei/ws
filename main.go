@@ -4,17 +4,24 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
-const version = "1.1"
+const version = "1.2"
 
 func main() {
-	md, err := getMetadata()
+	homeDir := os.Getenv("HOME")
+	if homeDir == "" {
+		printErr(errors.New("please set the HOME environment variable"))
+	}
+
+	md, err := getMetadata(filepath.Join(homeDir+".config/ws"), true)
 	if err != nil {
 		printErr(err)
 		os.Exit(1)
 	}
+
 	// Check the quantity of arguments are the allowed quantity.
 	l := len(os.Args)
 	switch l {
@@ -24,23 +31,23 @@ func main() {
 	case 2:
 		// The argument is either a known command or a workspace name.
 		switch os.Args[1] {
-		case "-help", "-h":
+		case "help", "h":
 			help()
-		case "-list", "-l":
+		case "list", "l":
 			ls, err := md.list()
 			if err != nil {
 				printErr(fmt.Errorf("list: %v", err))
 			}
 			fmt.Print(ls)
-		case "-version", "-v":
+		case "version", "v":
 			fmt.Printf("ws v%s\n", version)
 		default:
 			ws := os.Args[1]
 			if strings.HasPrefix(ws, "-") {
-				cmds := []string{"-delete", "-d", "-create", "-c"}
+				cmds := []string{"delete", "d", "create", "c"}
 				for _, cmd := range cmds {
 					if ws == cmd {
-						printErr(fmt.Errorf("command %s requires an aditional argument, see -help", cmd))
+						printErr(fmt.Errorf("command %s requires an aditional argument, see \"ws help\"", cmd))
 					}
 				}
 				printErr(fmt.Errorf("command %s not found", ws))
@@ -58,7 +65,7 @@ func main() {
 		ws := os.Args[2]
 
 		switch cmd {
-		case "-create", "-c":
+		case "create", "c":
 			// Get current working directory
 			pwd, err := os.Getwd()
 			if err != nil {
@@ -67,12 +74,12 @@ func main() {
 			if err := md.insert(ws, pwd); err != nil {
 				printErr(err)
 			}
-		case "-delete", "-d":
+		case "delete", "d":
 			if err := md.delete(ws); err != nil {
 				printErr(err)
 			}
 		default:
-			printErr(errors.New("please provide a valid command (See -help or -h)"))
+			printErr(errors.New("please provide a valid command (See \"ws help\")"))
 		}
 	}
 }

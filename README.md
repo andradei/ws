@@ -16,40 +16,48 @@ Run on your terminal `go get github.com/andradei/ws`. Or download a version from
 ## Commands
 
 ```bash
-$ ws -help
+$ ws help
 
 ws - Directory alias manager
 
 Usage: ws <command [workspace name]> | <workspace name>
 
-  -create | -c <workspace name>
+  create | c <workspace name>
        Create a workspace with given name
 
-   -delete | -d <workspace name>
+   delete | d <workspace name>
        Delete an existing workspace by name
 
-   -help | -h
+   help | h
        Display this help message
 
-   -list | -l
+   list | l
        List existing workspaces
 
-   -version | -v
+   version | v
        Display program version
 
 ```
 
-When using the `ws <workspace name>` form, `ws` will output the directory of for the given workspace name.
-So you can do the following:
+When using the `ws <workspace name>` form, `ws` will output the directory of for the given
+workspace name. So you can do the following:
 
-```
+```bash
 cd $(ws my_workspace)
 ```
 
 ## Examples
 
-- Create workspace: `ws -create project1`
+- Create workspace: `ws create project1`
 
 - Go to workspace: `cd $(ws project1)`
 
-- Delete workspace: `ws -delete project1`
+- Delete workspace: `ws delete project1`
+
+## Development
+
+You can run the scripts with `go run scripts/[file].go` or compile the script and run that, for
+example `go build -o dist scripts/distribute.go` then `./scripts/dist`
+
+- Compile to executable binaries: `go run scripts/distribute.go`
+- Run tests and generate coverage files: `go run scripts/test.go`

@@ -14,6 +14,8 @@ func main() {
 		for _, goarch := range archList {
 			var cmd = exec.Command("go", "build", "-o", "bin/ws_"+goos+"_"+goarch)
 			cmd.Env = append(os.Environ(), "GOOS="+goos, "GOARCH="+goarch)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
 
 			if err := cmd.Run(); err != nil {
 				panic("couldn't run command: " + err.Error())

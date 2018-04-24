@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	color "github.com/fatih/color-1.5.0"
+	color "github.com/fatih/color-1.6.0"
 )
 
 const file = "ws.json"
@@ -27,12 +27,12 @@ type metadata struct {
 // Try to read the contents on the metadata file and decode it into the workspaces type.
 // Create the metadata file if it didn't exist previously. This function may not write to the
 // metadata file.
-func getMetadata(path string, create bool) (*metadata, error) {
+func getMetadata(path string) (*metadata, error) {
 	path = filepath.Join(path, file)
 
 	md, err := os.Open(path)
 	if err != nil {
-		if os.IsNotExist(err) && create {
+		if os.IsNotExist(err) {
 			err = os.MkdirAll(path, 0700)
 			if err != nil {
 				return nil, fmt.Errorf("unable to create metadata config directory")

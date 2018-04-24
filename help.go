@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	color "github.com/fatih/color-1.5.0"
+	color "github.com/fatih/color-1.6.0"
 )
 
 // Print an error to stderr and exits the program. May panic.
@@ -33,10 +33,14 @@ func help() {
 		"\n%v %v <%v [%v]> | <%v>\n",
 		color.GreenString("Usage:"), ws, color.YellowString("command"), workspaceName, workspaceName,
 	)
-	create := fmt.Sprintf(cmdFmt, color.YellowString("create"), color.YellowString("c"), workspaceName, "Create a workspace with given name")
-	delete := fmt.Sprintf(cmdFmt, color.YellowString("delete"), color.YellowString("d"), workspaceName, "Delete an existing workspace by name")
-	help := fmt.Sprintf(cmdFmt, color.YellowString("help"), color.YellowString("h"), workspaceName, "Display this help message")
-	list := fmt.Sprintf(cmdFmt, color.YellowString("list"), color.YellowString("l"), workspaceName, "List existing workspaces")
+	create := fmt.Sprintf(cmdFmt, color.YellowString("create"), color.YellowString("c"),
+		workspaceName, "Create a workspace with given name")
+	delete := fmt.Sprintf(cmdFmt, color.YellowString("delete"), color.YellowString("d"),
+		workspaceName, "Delete an existing workspace by name")
+	help := fmt.Sprintf(cmdFmt, color.YellowString("help"), color.YellowString("h"),
+		workspaceName, "Display this help message")
+	list := fmt.Sprintf(cmdFmt, color.YellowString("list"), color.YellowString("l"),
+		workspaceName, "List existing workspaces")
 
 	fmt.Println(title, usage, create, delete, help, list)
 

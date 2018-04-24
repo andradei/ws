@@ -16,7 +16,7 @@ func main() {
 		printErr(errors.New("please set the HOME environment variable"))
 	}
 
-	md, err := getMetadata(filepath.Join(homeDir+".config/ws"), true)
+	md, err := getMetadata(filepath.Join(homeDir + ".config/ws"))
 	if err != nil {
 		printErr(err)
 		os.Exit(1)

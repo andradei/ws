@@ -20,7 +20,7 @@ func printErr(msg error) {
 func help() {
 	// TODO: Turn this into a template
 	// TODO: Register functions of color packages to print with color
-	cmdFmt := "\n  %v | %v %v\n    %v\n"
+	cmdFmt := "\n  %v | %v <%v>\n    %v\n"
 	ws := color.YellowString("ws")
 	workspaceName := color.YellowString("workspace name")
 	title := fmt.Sprintf(

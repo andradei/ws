@@ -35,7 +35,7 @@ func getMetadata(path string) (*metadata, error) {
 		if os.IsNotExist(err) {
 			err = os.MkdirAll(path, 0700)
 			if err != nil {
-				return nil, fmt.Errorf("unable to create metadata config directory")
+				return nil, fmt.Errorf("unable to create metadata config directory %v: %v", path, err)
 			}
 			// metadata will have an empty workspaces instance since no metadata file exists yet.
 			return &metadata{make([]workspace, 0, 1), path}, nil

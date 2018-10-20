@@ -27,13 +27,13 @@ type metadata struct {
 // Try to read the contents on the metadata file and decode it into the workspaces type.
 // Create the metadata file if it didn't exist previously. This function may not write to the
 // metadata file.
-func getMetadata(path string) (*metadata, error) {
-	path = filepath.Join(path, file)
+func getMetadata(dir string) (*metadata, error) {
+	path := filepath.Join(dir, file)
 
 	md, err := os.Open(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			err = os.MkdirAll(path, 0700)
+			err = os.MkdirAll(dir, 0700)
 			if err != nil {
 				return nil, fmt.Errorf("unable to create metadata config directory %v: %v", path, err)
 			}

@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	color "github.com/fatih/color-1.6.0"
+	color "github.com/fatih/color"
 )
 
 func TestGetMetadata(t *testing.T) {

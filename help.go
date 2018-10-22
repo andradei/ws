@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	color "github.com/fatih/color-1.6.0"
+	color "github.com/fatih/color"
 )
 
 // Print an error to stderr and exits the program. May panic.

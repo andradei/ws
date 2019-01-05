@@ -102,14 +102,17 @@ func TestGetMetadataCreateFile(t *testing.T) {
 
 func TestInsertAndDelete(t *testing.T) {
 	var md, err = getMetadata("testdata")
+	if err != nil {
+		t.Error("getMetadata failed:", err)
+	}
 
 	err = md.insert("testWorkspace", "/test/workspace")
 	if err != nil {
-		t.Error("insertion failure", err)
+		t.Error("insertion failure:", err)
 	}
 
 	err = md.delete("testWorkspace")
 	if err != nil {
-		t.Error("deletion failure", err)
+		t.Error("deletion failure:", err)
 	}
 }

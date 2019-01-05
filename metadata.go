@@ -73,7 +73,12 @@ func parseWorkspaces(path string) ([]workspace, error) {
 	return ws, nil
 }
 
-func (md *metadata) insert(name string, path string) error {
+func (md *metadata) insert(name string) error {
+	// Get current working directory
+	path, err := os.Getwd()
+	if err != nil {
+		printErr(fmt.Errorf("unable to retrieve working directory: %v", err))
+	}
 	if _, err := md.getWorkspace(name); err == nil {
 		return fmt.Errorf("workspace name already exists: %v", err)
 	}

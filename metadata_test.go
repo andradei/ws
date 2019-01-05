@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	color "github.com/fatih/color"
+	"github.com/logrusorgru/aurora"
 )
 
 func TestGetMetadata(t *testing.T) {
@@ -51,9 +51,6 @@ func TestGetMetadata(t *testing.T) {
 			t.Error("(*metadata).list() failed:", err)
 		}
 
-		yellow := color.New(color.FgYellow).SprintfFunc()
-		green := color.New(color.FgGreen).SprintfFunc()
-
 		// The string formatting is used because the terminal colors need to be compared
 		// because they are text that get escaped by the terminal.
 		var list = fmt.Sprintf(`  %v
@@ -67,16 +64,16 @@ func TestGetMetadata(t *testing.T) {
   %v
     %v
 `,
-			green("code"),
-			yellow("/some/path/to/code"),
-			green("exercises"),
-			yellow("/some/path/to/exercises"),
-			green("github"),
-			yellow("/some/path/to/github"),
-			green("gitlab"),
-			yellow("/some/path/to/gitlab"),
-			green("mysite"),
-			yellow("/some/path/to/mysite"),
+			aurora.Green("code"),
+			aurora.Brown("/some/path/to/code"),
+			aurora.Green("exercises"),
+			aurora.Brown("/some/path/to/exercises"),
+			aurora.Green("github"),
+			aurora.Brown("/some/path/to/github"),
+			aurora.Green("gitlab"),
+			aurora.Brown("/some/path/to/gitlab"),
+			aurora.Green("mysite"),
+			aurora.Brown("/some/path/to/mysite"),
 		)
 
 		if l != list {

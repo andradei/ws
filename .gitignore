@@ -1,11 +1,7 @@
 bin/*
 !bin/.gitkeep
 
-scripts/*
-!scripts/*.go
-
 .vscode
-
 coverage.html
 
 # Binaries for programs and plugins

@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	color "github.com/fatih/color"
+	"github.com/logrusorgru/aurora"
 )
 
 const file = "ws.json"
@@ -73,7 +73,12 @@ func parseWorkspaces(path string) ([]workspace, error) {
 	return ws, nil
 }
 
-func (md *metadata) insert(name string, path string) error {
+func (md *metadata) insert(name string) error {
+	// Get current working directory
+	path, err := os.Getwd()
+	if err != nil {
+		printErr(fmt.Errorf("unable to retrieve working directory: %v", err))
+	}
 	if _, err := md.getWorkspace(name); err == nil {
 		return fmt.Errorf("workspace name already exists: %v", err)
 	}
@@ -127,11 +132,9 @@ func (md *metadata) delete(name string) error {
 // Create a list of workspaces stored in the metadata file.
 func (md *metadata) list() (string, error) {
 	var result bytes.Buffer
-	yellow := color.New(color.FgYellow).SprintfFunc()
-	green := color.New(color.FgGreen).SprintfFunc()
 
 	for _, ws := range md.workspaces {
-		_, err := result.WriteString(fmt.Sprintf("  %s\n    %s\n", green(ws.Name), yellow(ws.Path)))
+		_, err := result.WriteString(fmt.Sprintf("  %s\n    %s\n", aurora.Green(ws.Name), aurora.Brown(ws.Path)))
 		if err != nil {
 			return "", fmt.Errorf("unable to write list: %v", err)
 		}
